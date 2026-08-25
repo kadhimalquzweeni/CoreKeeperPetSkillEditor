@@ -6,7 +6,8 @@ The application allows you to load a Core Keeper character save, select a pet fr
 
 ## How It Works
 
-1. Select your Core Keeper character save file. Located in C:\*USERNAME*\PC\AppData\LocalLow\Pugstorm\Core Keeper\Steam\*ID*\saves for steam
+1. Select your Core Keeper character save file. typically located at:
+C:\Users\(USERNAME)\AppData\LocalLow\Pugstorm\Core Keeper\Steam\(ID)\saves
 2. Choose a pet from the detected pets.
 3. View and modify the pet's talents.
 4. Select talents for the available talent slots.
