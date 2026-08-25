@@ -10,8 +10,7 @@ C:\Users\(USERNAME)\AppData\LocalLow\Pugstorm\Core Keeper\Steam\(ID)\saves
 2. Choose a pet from the detected pets.
 3. View and modify the pet's talents.
 4. Select talents for the available talent slots.
-5. Click **Copy First Talent to All 9** if you want every slot to use the same talent.
-6. Click **Save to Core Keeper**.
+5. Click **Save to Core Keeper**.
 
 The application creates a backup of the original save before modifying it.
 
