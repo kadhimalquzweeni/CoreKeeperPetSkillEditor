@@ -2,7 +2,6 @@
 
 The application allows you to load a Core Keeper character save, select a pet from the inventory, customise its talents, and save the changes back to the character file.
 
----
 
 ## How It Works
 
@@ -16,7 +15,6 @@ C:\Users\(USERNAME)\AppData\LocalLow\Pugstorm\Core Keeper\Steam\(ID)\saves
 
 The application creates a backup of the original save before modifying it.
 
----
 
 ## Important
 
