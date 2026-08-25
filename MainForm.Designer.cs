@@ -296,12 +296,12 @@
             // 
             // btnLoadSave
             // 
-            btnLoadSave.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnLoadSave.Location = new Point(144, 6);
+            btnLoadSave.Font = new Font("Yu Gothic", 9F, FontStyle.Bold);
+            btnLoadSave.Location = new Point(148, 9);
             btnLoadSave.Name = "btnLoadSave";
-            btnLoadSave.Size = new Size(163, 28);
+            btnLoadSave.Size = new Size(159, 28);
             btnLoadSave.TabIndex = 1;
-            btnLoadSave.Text = "Load Core Keeper Save";
+            btnLoadSave.Text = "Load Save File";
             btnLoadSave.UseVisualStyleBackColor = true;
             btnLoadSave.Click += btnLoadSave_Click;
             // 
@@ -320,16 +320,16 @@
             // lblLoadedSave
             // 
             lblLoadedSave.AutoSize = true;
-            lblLoadedSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblLoadedSave.Location = new Point(12, 9);
+            lblLoadedSave.Font = new Font("Yu Gothic", 10F, FontStyle.Bold);
+            lblLoadedSave.Location = new Point(12, 14);
             lblLoadedSave.Name = "lblLoadedSave";
-            lblLoadedSave.Size = new Size(133, 21);
+            lblLoadedSave.Size = new Size(118, 18);
             lblLoadedSave.TabIndex = 3;
             lblLoadedSave.Text = "No Save Loaded";
             // 
             // btnSaveToCoreKeeper
             // 
-            btnSaveToCoreKeeper.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnSaveToCoreKeeper.Font = new Font("Yu Gothic", 12F, FontStyle.Bold);
             btnSaveToCoreKeeper.Location = new Point(12, 383);
             btnSaveToCoreKeeper.Name = "btnSaveToCoreKeeper";
             btnSaveToCoreKeeper.Size = new Size(295, 43);
@@ -340,7 +340,7 @@
             // 
             // btnCopyFirstTalentToAll
             // 
-            btnCopyFirstTalentToAll.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnCopyFirstTalentToAll.Font = new Font("Yu Gothic", 9F, FontStyle.Bold);
             btnCopyFirstTalentToAll.Location = new Point(148, 123);
             btnCopyFirstTalentToAll.Name = "btnCopyFirstTalentToAll";
             btnCopyFirstTalentToAll.Size = new Size(156, 23);
@@ -352,10 +352,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label1.Font = new Font("Yu Gothic", 9F, FontStyle.Bold);
             label1.Location = new Point(12, 53);
             label1.Name = "label1";
-            label1.Size = new Size(64, 15);
+            label1.Size = new Size(67, 16);
             label1.TabIndex = 6;
             label1.Text = "Select Pet";
             // 
