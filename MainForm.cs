@@ -12,6 +12,11 @@ public partial class MainForm : Form
     new();
     private List<Pet> _pets = [];
 
+    private readonly List<PetTalentDefinition> _allTalents =
+        PetTalentData.All.ToList();
+
+    private bool _isUpdatingTalentComboBox;
+
     public MainForm()
     {
         InitializeComponent();
@@ -34,10 +39,12 @@ public partial class MainForm : Form
 
     private void LoadTalents()
     {
-        foreach (var comboBox in _talentComboBoxes)
+        foreach (ComboBox comboBox in _talentComboBoxes)
         {
+            comboBox.DropDownStyle = ComboBoxStyle.DropDown;
+
             comboBox.DataSource =
-                new List<PetTalentDefinition>(PetTalentData.All);
+                new List<PetTalentDefinition>(_allTalents);
 
             comboBox.DisplayMember =
                 nameof(PetTalentDefinition.DisplayName);
@@ -46,6 +53,8 @@ public partial class MainForm : Form
                 nameof(PetTalentDefinition.Id);
 
             comboBox.SelectedIndex = -1;
+
+            comboBox.TextUpdate += TalentComboBox_TextUpdate;
         }
     }
 
@@ -239,6 +248,54 @@ public partial class MainForm : Form
         {
             comboBox.SelectedItem =
                 firstTalentComboBox.SelectedItem;
+        }
+    }
+    private void TalentComboBox_TextUpdate(
+        object? sender,
+        EventArgs e)
+    {
+        if (_isUpdatingTalentComboBox)
+        {
+            return;
+        }
+
+        if (sender is not ComboBox comboBox)
+        {
+            return;
+        }
+
+        string searchText = comboBox.Text.Trim();
+
+        var filteredTalents = _allTalents
+            .Where(t =>
+                t.DisplayName.Contains(
+                    searchText,
+                    StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        _isUpdatingTalentComboBox = true;
+
+        try
+        {
+            comboBox.DataSource = null;
+
+            comboBox.DataSource = filteredTalents;
+
+            comboBox.DisplayMember =
+                nameof(PetTalentDefinition.DisplayName);
+
+            comboBox.ValueMember =
+                nameof(PetTalentDefinition.Id);
+
+            comboBox.Text = searchText;
+            comboBox.SelectionStart = searchText.Length;
+            comboBox.SelectionLength = 0;
+
+            comboBox.DroppedDown = true;
+        }
+        finally
+        {
+            _isUpdatingTalentComboBox = false;
         }
     }
 }
