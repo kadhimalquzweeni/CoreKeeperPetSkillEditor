@@ -54,6 +54,9 @@
             btnSaveToCoreKeeper = new Button();
             btnCopyFirstTalentToAll = new Button();
             label1 = new Label();
+            label2 = new Label();
+            cmbCreatePetType = new ComboBox();
+            btnCreatePet = new Button();
             tlpTalents.SuspendLayout();
             SuspendLayout();
             // 
@@ -81,7 +84,7 @@
             tlpTalents.Controls.Add(lblTalent2, 0, 1);
             tlpTalents.Controls.Add(lblTalent1, 0, 0);
             tlpTalents.Controls.Add(cmbTalent1, 1, 0);
-            tlpTalents.Location = new Point(12, 149);
+            tlpTalents.Location = new Point(12, 206);
             tlpTalents.Name = "tlpTalents";
             tlpTalents.RowCount = 9;
             tlpTalents.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
@@ -311,7 +314,7 @@
             cmbPets.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPets.ForeColor = SystemColors.WindowText;
             cmbPets.FormattingEnabled = true;
-            cmbPets.Location = new Point(12, 71);
+            cmbPets.Location = new Point(12, 145);
             cmbPets.Name = "cmbPets";
             cmbPets.Size = new Size(295, 23);
             cmbPets.TabIndex = 2;
@@ -330,7 +333,7 @@
             // btnSaveToCoreKeeper
             // 
             btnSaveToCoreKeeper.Font = new Font("Yu Gothic", 12F, FontStyle.Bold);
-            btnSaveToCoreKeeper.Location = new Point(12, 383);
+            btnSaveToCoreKeeper.Location = new Point(12, 440);
             btnSaveToCoreKeeper.Name = "btnSaveToCoreKeeper";
             btnSaveToCoreKeeper.Size = new Size(295, 43);
             btnSaveToCoreKeeper.TabIndex = 4;
@@ -341,7 +344,7 @@
             // btnCopyFirstTalentToAll
             // 
             btnCopyFirstTalentToAll.Font = new Font("Yu Gothic", 9F, FontStyle.Bold);
-            btnCopyFirstTalentToAll.Location = new Point(148, 123);
+            btnCopyFirstTalentToAll.Location = new Point(148, 180);
             btnCopyFirstTalentToAll.Name = "btnCopyFirstTalentToAll";
             btnCopyFirstTalentToAll.Size = new Size(156, 23);
             btnCopyFirstTalentToAll.TabIndex = 5;
@@ -353,18 +356,53 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Yu Gothic", 9F, FontStyle.Bold);
-            label1.Location = new Point(12, 53);
+            label1.Location = new Point(12, 127);
             label1.Name = "label1";
             label1.Size = new Size(67, 16);
             label1.TabIndex = 6;
             label1.Text = "Select Pet";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Yu Gothic", 9F, FontStyle.Bold);
+            label2.Location = new Point(12, 52);
+            label2.Name = "label2";
+            label2.Size = new Size(80, 16);
+            label2.TabIndex = 8;
+            label2.Text = "Create a Pet";
+            // 
+            // cmbCreatePetType
+            // 
+            cmbCreatePetType.Anchor = AnchorStyles.Top;
+            cmbCreatePetType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbCreatePetType.ForeColor = SystemColors.WindowText;
+            cmbCreatePetType.FormattingEnabled = true;
+            cmbCreatePetType.Location = new Point(12, 70);
+            cmbCreatePetType.Name = "cmbCreatePetType";
+            cmbCreatePetType.Size = new Size(295, 23);
+            cmbCreatePetType.TabIndex = 7;
+            // 
+            // btnCreatePet
+            // 
+            btnCreatePet.Font = new Font("Yu Gothic", 9F, FontStyle.Bold);
+            btnCreatePet.Location = new Point(151, 99);
+            btnCreatePet.Name = "btnCreatePet";
+            btnCreatePet.Size = new Size(156, 23);
+            btnCreatePet.TabIndex = 9;
+            btnCreatePet.Text = "Create Pet";
+            btnCreatePet.UseVisualStyleBackColor = true;
+            btnCreatePet.Click += btnCreatePet_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(128, 128, 255);
-            ClientSize = new Size(319, 432);
+            ClientSize = new Size(319, 495);
+            Controls.Add(btnCreatePet);
+            Controls.Add(label2);
+            Controls.Add(cmbCreatePetType);
             Controls.Add(label1);
             Controls.Add(btnCopyFirstTalentToAll);
             Controls.Add(btnSaveToCoreKeeper);
@@ -413,5 +451,8 @@
         private Button btnSaveToCoreKeeper;
         private Button btnCopyFirstTalentToAll;
         private Label label1;
+        private Label label2;
+        private ComboBox cmbCreatePetType;
+        private Button btnCreatePet;
     }
 }

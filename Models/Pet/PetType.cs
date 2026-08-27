@@ -2,19 +2,24 @@
 {
     public enum PetType
     {
-        PetDog = 1222,
-        PetCat = 1225,
-        PetBird = 1228,
-        PetSlimeBlob = 1231,
-        PetBunny = 1234,
-        PetSlipperySlimeBlob = 1237,
-        PetPoisonSlimeBlob = 1240,
-        PetLavaSlimeBlob = 1243,
-        PetPrinceSlimeBlob = 1246,
-        PetMoth = 1247,
-        PetTardigrade = 1252,
-        PetMagic = 1253,
-        PetElectric = 1258,
-        PetWarlock = 1261,
+        // Melee
+        Subterrier = 1222,
+        JrOrangeSlime = 1231,
+        ElectroPest = 1258,
+        PrinceSlime = 1246,
+        JrPurpleSlime = 1240,
+        JrBlueSlime = 1237,
+        JrLavaSlime = 1243,
+        Snugglygrade = 1252,
+
+        // Range
+        Embertail = 1225,
+        Fanhare = 1234,
+
+        // Buff
+        Owlux = 1228,
+        Earie = 1261,
+        Pheromoth = 1247,
+        ArcaneSymbiote = 1253
     }
 }

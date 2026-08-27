@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using CoreKeeperPetSkillEditor.Models.Pet;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace CoreKeeperPetSkillEditor.Models.ItemAux;
@@ -90,5 +91,36 @@ public class AuxPrefabManager
         };
 
         return jsonObject.ToJsonString();
+    }
+    public static AuxPrefabManager CreatePet(
+    string petName,
+    int color,
+    IEnumerable<PetTalent> talents)
+    {
+        var prefabs = new List<AuxPrefab>
+    {
+        new(
+            AuxHash.ItemNameGroupHash,
+            [
+                new AuxStableType(
+                    AuxHash.ItemNameHash,
+                    [petName])
+            ]),
+
+        new(
+            AuxHash.PetGroupHash,
+            [
+                new AuxStableType(
+                    AuxHash.PetColorHash,
+                    [color.ToString()]),
+
+                new AuxStableType(
+                    AuxHash.PetTalentsHash,
+                    talents
+                        .Select(t => t.ToJsonString()))
+            ])
+    };
+
+        return new AuxPrefabManager(prefabs);
     }
 }

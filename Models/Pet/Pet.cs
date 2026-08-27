@@ -5,7 +5,18 @@ namespace CoreKeeperPetSkillEditor.Models.Pet;
 public class Pet : Item
 {
     public int InventoryIndex { get; set; }
-
+    public PetType Type
+    {
+        get
+        {
+            return (PetType)objectID;
+        }
+    }
+    public int Exp
+    {
+        get => amount;
+        set => amount = value;
+    }
     public Pet(Item item, int inventoryIndex)
         : base(
             item.objectID,

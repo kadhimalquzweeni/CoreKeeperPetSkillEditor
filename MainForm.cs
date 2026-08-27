@@ -35,6 +35,7 @@ public partial class MainForm : Form
         ];
 
         LoadTalents();
+        LoadPetTypes();
     }
 
     private void LoadTalents()
@@ -57,7 +58,11 @@ public partial class MainForm : Form
             comboBox.TextUpdate += TalentComboBox_TextUpdate;
         }
     }
-
+    private void LoadPetTypes()
+    {
+        cmbCreatePetType.DataSource =
+            Enum.GetValues<PetType>();
+    }
     private void btnLoadSave_Click(
         object sender,
         EventArgs e)
@@ -134,8 +139,9 @@ public partial class MainForm : Form
                 PetTalent petTalent = talents[i];
 
                 var talentDefinition =
-                    PetTalentData.All.FirstOrDefault(t =>
-                        t.Id == petTalent.Talent);
+                    GetTalentDefinition(
+                        selectedPet,
+                        petTalent);
 
                 _talentComboBoxes[i].SelectedItem =
                     talentDefinition;
@@ -296,6 +302,81 @@ public partial class MainForm : Form
         finally
         {
             _isUpdatingTalentComboBox = false;
+        }
+    }
+    private PetTalentDefinition? GetTalentDefinition(
+    Pet selectedPet,
+    PetTalent petTalent)
+    {
+        PetBattleType battleType =
+            PetBattleTypeData.GetBattleType(
+                selectedPet.Type);
+
+        string variant =
+            battleType.ToString();
+
+        // First try the pet's natural battle type.
+        PetTalentDefinition? talentDefinition =
+            PetTalentData.All.FirstOrDefault(t =>
+                t.Id == petTalent.Talent &&
+                t.Variant.Equals(
+                    variant,
+                    StringComparison.OrdinalIgnoreCase));
+
+        // Some talents are universal.
+        talentDefinition ??=
+            PetTalentData.All.FirstOrDefault(t =>
+                t.Id == petTalent.Talent &&
+                t.Variant.Equals(
+                    "Universal",
+                    StringComparison.OrdinalIgnoreCase));
+
+        return talentDefinition;
+    }
+
+    private void btnCreatePet_Click(
+        object sender,
+        EventArgs e)
+    {
+        if (cmbCreatePetType.SelectedItem
+            is not PetType petType)
+        {
+            MessageBox.Show(
+                "Please select a pet type.",
+                "No Pet Type Selected",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+
+            return;
+        }
+
+        try
+        {
+            Pet newPet =
+                _saveDataManager.CreatePet(
+                    petType);
+
+            _pets.Add(newPet);
+
+            cmbPets.DataSource = null;
+            cmbPets.DataSource = _pets;
+
+            cmbPets.SelectedItem =
+                newPet;
+
+            MessageBox.Show(
+                $"{petType} was created successfully!",
+                "Pet Created",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(
+                $"Failed to create pet:\n\n{ex.Message}",
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CoreKeeperPetSkillEditor.Models.ItemAux;
+﻿using CoreKeeperPetSkillEditor.Data;
+using CoreKeeperPetSkillEditor.Models.ItemAux;
 using CoreKeeperPetSkillEditor.Models.Items;
 using CoreKeeperPetSkillEditor.Models.Pet;
 using System.Text.Json;
@@ -184,5 +185,130 @@ public class SaveDataManager
 
         SaveData["lastActiveSession"]!["Value"] =
             valueObject;
+    }
+    public Pet CreatePet(
+    PetType petType)
+    {
+        if (SaveData is null ||
+            string.IsNullOrWhiteSpace(SaveDataPath))
+        {
+            throw new InvalidOperationException(
+                "Please load a Core Keeper save first.");
+        }
+
+        // We will use an empty inventory slot.
+        var inventory =
+            SaveData["inventory"]!.AsArray();
+
+        var inventoryNames =
+            SaveData["inventoryObjectNames"]!.AsArray();
+
+        var inventoryAux =
+            SaveData["inventoryAuxData"]!.AsArray();
+
+        int inventoryIndex =
+            FindEmptyInventorySlot(inventory);
+
+        if (inventoryIndex == -1)
+        {
+            throw new InvalidOperationException(
+                "No empty inventory slots were found.");
+        }
+
+        const int level10Experience = 999999;
+
+        var talents =
+            PetDefaults.CreateDefaultTalents();
+
+        var auxManager =
+            AuxPrefabManager.CreatePet(
+                petType.ToString(),
+                0,
+                talents);
+
+        var item = new Item(
+            (int)petType,
+            level10Experience,
+            0,
+            0,
+            petType.ToString(),
+            new ItemAuxData(
+                0,
+                auxManager.GetJsonString()));
+
+        var pet =
+            new Pet(
+                item,
+                inventoryIndex);
+
+        // Write it into the save.
+        SaveNewPet(pet);
+
+        return pet;
+    }
+    private static int FindEmptyInventorySlot(
+    JsonArray inventory)
+    {
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            JsonObject item =
+                inventory[i]!.AsObject();
+
+            int objectId =
+                item["objectID"]!
+                    .GetValue<int>();
+
+            if (objectId == 0)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+    private void SaveNewPet(
+    Pet pet)
+    {
+        int index =
+            pet.InventoryIndex;
+
+        var itemData = new
+        {
+            objectID = pet.objectID,
+            amount = pet.amount,
+            variation = pet.variation,
+            variationUpdateCount =
+                pet.variationUpdateCount
+        };
+
+        SaveData["inventory"]![index] =
+            JsonNode.Parse(
+                JsonSerializer.Serialize(
+                    itemData));
+
+        SaveData["inventoryObjectNames"]![index] =
+            pet.keyName;
+
+        SaveData["inventoryAuxData"]![index] =
+            JsonNode.Parse(
+                JsonSerializer.Serialize(
+                    pet.Aux));
+
+        ResetLastActiveSession();
+
+        string changedJson =
+            SaveData.ToJsonString(
+                new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                });
+
+        changedJson =
+            RestoreJsonString(
+                changedJson);
+
+        File.WriteAllText(
+            SaveDataPath,
+            changedJson);
     }
 }
