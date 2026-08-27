@@ -1,7 +1,6 @@
 # Core Keeper Pet Talent Editor
-<img width="321" height="464" alt="image" src="https://github.com/user-attachments/assets/8206f21c-9d62-4c57-b5ab-87f4f30d1f2a" />
-<img width="321" height="464" alt="image" src="https://github.com/user-attachments/assets/8abfc2ff-9d45-4c55-a3f0-a515a3486d71" />
-<img width="323" height="464" alt="image" src="https://github.com/user-attachments/assets/00f1922f-4cca-43e5-81dc-a278e39eb6dd" />
+<img width="321" height="527" alt="image" src="https://github.com/user-attachments/assets/b8612b42-b7c7-46c0-b857-3d133a285779" />
+
 
 The application allows you to load a Core Keeper character save, select a pet from the inventory, customise its talents, and save the changes back to the character file.
 
